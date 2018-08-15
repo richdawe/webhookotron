@@ -17,14 +17,14 @@ bucket-stamp:
 	aws s3api put-bucket-lifecycle-configuration --bucket $(S3_DATA) --lifecycle-configuration file://s3-data-rules.json
 	touch $@
 
-packaged.yaml:	template.yaml
+packaged.yaml:	build-stamp template.yaml
 	sam package \
     	--template-file template.yaml \
     	--output-template-file packaged.yaml \
     	--s3-bucket $(S3_CODE)
 
 .PHONY:	deploy
-deploy:	packaged.yaml
+deploy:	bucket-stamp packaged.yaml
 	sam deploy \
     	--template-file packaged.yaml \
     	--stack-name $(STACK) \
