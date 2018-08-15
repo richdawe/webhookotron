@@ -8,7 +8,7 @@ Description: >
 # More info about Globals: https://github.com/awslabs/serverless-application-model/blob/master/docs/globals.rst
 Globals:
     Function:
-        Timeout: 3
+        Timeout: 30
 
 
 Resources:
@@ -28,6 +28,11 @@ Resources:
                     Properties:
                         Path: /webhook
                         Method: post
+            Policies:
+                # XXX: Find out how to restrict this to put to a specific bucket
+                # E.g.: based on https://docs.aws.amazon.com/lambda/latest/dg/policy-templates.html
+                # How to do we put that kind of policy into this file?
+                - AmazonS3FullAccess
 
 Outputs:
 

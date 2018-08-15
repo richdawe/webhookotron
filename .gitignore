@@ -107,3 +107,4 @@ venv.bak/
 sam-app/build-stamp
 sam-app/build
 sam-app/bucket-stamp
+sam-app/packaged.yaml
