@@ -25,8 +25,16 @@ def lambda_handler(event, context):
         dict -- {'statusCode': int, 'body': dict}
     """
 
-    # Only accept JSON
-    if event['headers']['Content-Type'] != 'application/json':
+    #print(json.dumps(event))
+
+    # Only accept JSON. If the client doesn't specify a Content-Type,
+    # assume it's JSON.
+    ct = 'application/json'
+    try:
+        ct = event['headers']['Content-Type']
+    except:
+        pass
+    if ct != 'application/json':
         return {
             "statusCode": 200,
             "body": "Unsupported content type " + event.headers['Content-Type']
