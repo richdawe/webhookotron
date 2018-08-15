@@ -54,3 +54,4 @@ Some SQL files are provided for running in AWS Athena:
 3) athena-query-table.sql -- Example Athena query. Repeated here:
 
     SELECT * FROM webhookotron_events WHERE msg_from LIKE '%@example.com';
+
