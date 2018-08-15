@@ -1,0 +1,15 @@
+{
+  "Rules": [
+    {
+      "Status": "Enabled",
+      "Prefix": "",
+      "ID": "Expire old events",
+      "Expiration": {
+        "Days": 14
+      },
+      "AbortIncompleteMultipartUpload": {
+        "DaysAfterInitiation": 1
+      }
+    }
+  ]
+}

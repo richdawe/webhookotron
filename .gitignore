@@ -106,3 +106,4 @@ venv.bak/
 # Local build ignores
 sam-app/build-stamp
 sam-app/build
+sam-app/bucket-stamp

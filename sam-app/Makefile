@@ -1,4 +1,7 @@
-default:	build-stamp
+S3_CODE = webhookotron-code
+S3_DATA = webhookotron-data
+
+default:	bucket-stamp build-stamp
 
 # XXX: switch back to build under webhookotron/
 build-stamp:	requirements.txt webhookotron/app.py webhookotron/__init__.py
@@ -7,6 +10,13 @@ build-stamp:	requirements.txt webhookotron/app.py webhookotron/__init__.py
 	cp -a  webhookotron/*.py build
 	touch $@
 
+bucket-stamp:
+	aws s3api list-buckets | grep -q $(S3_CODE) || aws s3 mb s3://$(S3_CODE)
+	aws s3api list-buckets | grep -q $(S3_DATA) || aws s3 mb s3://$(S3_DATA)
+	aws s3api put-bucket-lifecycle-configuration --bucket $(S3_DATA) --lifecycle-configuration file://s3-data-rules.json
+	touch $@
+
 clean:
+	rm -f bucket-stamp
 	rm -rf build
 	rm -f build-stamp
